@@ -24,16 +24,11 @@ public class UserWriteActionController implements Controller {
 			try {
 				UserService userService = UserService.getInstance();
 				newUser = new User(userId, password, name, email);
-				int insertRowCount = userService.create(newUser);
-				if (insertRowCount == 1) {
-					forwardPath = "redirect:user_login_form.do";
-				} else {
-					forwardPath = "forward:user_error.do";
-				}
+				userService.create(newUser);
 			} catch (ExistedUserException e) {
 				request.setAttribute("msg", e.getMessage());
 				request.setAttribute("fuser", newUser);
-				forwardPath = "redirect:user_error.do";
+				forwardPath = "forward:user_write_form.do";
 			} catch (Exception e) {
 				e.printStackTrace();
 				forwardPath = "redirect:user_error.do";
