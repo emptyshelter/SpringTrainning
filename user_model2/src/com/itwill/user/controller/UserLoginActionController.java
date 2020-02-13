@@ -15,13 +15,16 @@ public class UserLoginActionController implements Controller {
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
 		String forwardPath = "";
+		String userId = "";
+		String password = "";
+		
 		if (request.getMethod().equalsIgnoreCase("GET")) {
 			forwardPath = "redirect:user_main.do";
 		} else {
 			try {
 				// request.setCharacterEncoding("UTF-8");
-				String userId = request.getParameter("userId");
-				String password = request.getParameter("password");
+				userId = request.getParameter("userId");
+				password = request.getParameter("password");
 				UserService userService = UserService.getInstance();
 				User loginUser = userService.login(userId, password);
 				request.getSession().setAttribute("sUserId", userId);
@@ -30,9 +33,11 @@ public class UserLoginActionController implements Controller {
 
 			} catch (UserNotFoundException e) {
 				request.setAttribute("msg1", e.getMessage());
+				request.setAttribute("fUser", new User(userId,password,"","" ));
 				forwardPath = "forward:user_login_form.do";
 			} catch (PasswordMismatchException e) {
 				request.setAttribute("msg2", e.getMessage());
+				request.setAttribute("fUser", new User(userId,password,"","" ));
 				forwardPath = "forward:user_login_form.do";
 			} catch (Exception e) {
 				e.printStackTrace();
