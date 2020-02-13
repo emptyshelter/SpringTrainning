@@ -1,4 +1,4 @@
-package com.itwill.controller;
+package com.itwill.user.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

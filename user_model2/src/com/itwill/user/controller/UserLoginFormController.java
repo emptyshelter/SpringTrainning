@@ -1,4 +1,4 @@
-package com.itwill.controller;
+package com.itwill.user.controller;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

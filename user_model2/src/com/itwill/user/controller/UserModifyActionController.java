@@ -1,4 +1,4 @@
-package com.itwill.controller;
+package com.itwill.user.controller;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
