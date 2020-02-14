@@ -1,6 +1,7 @@
 <%@page import="com.itwill.user.exception.UserNotFoundException"%>
 <%@page import="com.itwill.user.User"%>
 <%@page import="com.itwill.user.UserService"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%--!
 private UserService userService;
 public void jspInit(){
@@ -105,10 +106,12 @@ public void jspInit(){
 							<table border="0" cellpadding="0" cellspacing="1">
 								<tr>
 									<td align=center>
-										<%--if(sUserId.equals(userId)){--%>
+										<c:choose>
+											<c:when test="${sUserId.equals(user.userId) }">
 											<input type="button" value="수정" onClick="userModify()"> &nbsp; 
 											<input type="button" value="삭제" onClick="userRemove()"> &nbsp;
-										<%--} --%> 
+											</c:when>
+										</c:choose> 
 										<input type="button" value="목록" onClick="userList()"></td>
 								</tr>
 							</table>

@@ -1,22 +1,11 @@
 <%@page import="com.itwill.user.UserService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-	boolean isDuplicate=false;
-	String msg="";
-	String userId = request.getParameter("userId");
-	if(userId==null || userId.equals("")){
-		userId="";
-		isDuplicate=true;
-	}else{
-	  UserService userService=new UserService();
-	  isDuplicate = userService.isDuplcateUserId(userId);
-	  if(isDuplicate){
-		  msg="사용 불가능한 아이디입니다.";
-	  }else{
-		  msg="사용 가능한 아이디입니다.";
-	  }
-	}
+	String userId = (String) request.getAttribute("userId");
+	String msg = (String) request.getAttribute("msg");
+	Boolean isDuplicate = (Boolean) request.getAttribute("isDuplicate");
 %>	
 <html>
 <head>
@@ -50,19 +39,19 @@
 		
 		
 		// 아이디 중복체크
-		function idCheck(){
+		function idCheck() {
 			var userId = document.getElementById("userId").value;
 			if (!userId) {
 				alert("검색할 아이디를 입력하시고 중복체크를 하셔요.");
 				return false;
 				
-			}else if((userId < "0" || userId > "9") && (userId < "A" || userId > "Z") && (userId < "a" || userId > "z")){
+			} else if((userId < "0" || userId > "9") && (userId < "A" || userId > "Z") && (userId < "a" || userId > "z")) {
 				alert("한글 및 특수문자는 아이디로 사용하실 수 없습니다.");
 				return false;
-			}else{
-				var param="userId="+userId
-				var url = "user_id_check_form.jsp?"+param;
-				location.href=url;
+			} else {
+				var param = "userId=" + userId
+				var url = "user_id_check_form.do?" + param;
+				location.href = url;
 			}
 		}
 		
@@ -71,7 +60,7 @@
 		// 사용하기 클릭 시 부모창으로 값 전달 
 		function sendCheckValue(){
 			// 중복체크 결과인 idCheck 값을 전달한다.
-			opener.document.f.idDuplication.value ="idCheck";
+			opener.document.f.idDuplication.value = "idCheck";
 			// 회원가입 화면의 ID입력란에 값을 전달
 			opener.document.f.userId.value = window.document.getElementById("userId").value;
 			//opener.document.f.userId.readonly="readonly";
@@ -92,15 +81,15 @@
 		<br>
 		<div id="chk">
 			<form id="checkForm">
-				<input type="text" name="userId" id="userId" value="<%=userId%>"> <input
-					type="button" value="중복확인" onclick="idCheck()">
+				<input type="text" name="userId" id="userId" value="${userId}">
+				<input type="button" value="중복확인" onclick="idCheck()">
 			</form>
-			<div id="msg"><%=msg%></div>
+			<div id="msg">${msg}</div>
 			
 			<br> <input id="cancelBtn" type="button" value="취소" onclick="window.close()">
-				<%if(!isDuplicate){ %>
-				<input id="useBtn" type="button" value="사용하기" onclick="sendCheckValue()">
-				<% }%>
+				<c:if test="${!isDuplicate}">
+					<input id="useBtn" type="button" value="사용하기" onclick="sendCheckValue()">
+				</c:if>
 		</div>
 	</div>
 </body>
