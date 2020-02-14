@@ -4,10 +4,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="user_login_check.jspf" %>
-<%
-	ArrayList<User> userList = (ArrayList<User>)request.getAttribute("userList");
-%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -70,26 +67,19 @@ function userList() {
 										<td align=center bgcolor="E6ECDE">이메일</td>
 									</tr>
 									<!-- loop start -->
-									<%
-									for(User user:userList){
-										
-									%>
+									<c:forEach var= "user" items="${userList}">
 									<tr>
 										<td width=190 align=center bgcolor="ffffff" height="20">
-											<%=user.getUserId() %>
+											${user.userId}
 										</td>
 										<td width=200 bgcolor="ffffff" style="padding-left: 10">
-											<a href="user_view.do?userId=<%=user.getUserId()%>"
-											class="user"><%=user.getName() %></a>
+											<a href="user_view.do?userId=${user.userId}"
+											class="user">${user.name}</a>
 										</td>
-										<td width=200 align=center bgcolor="ffffff"><%=user.getEmail() %>
+										<td width=200 align=center bgcolor="ffffff">${user.email}
 										</td>
 									</tr>
-									
-									<%
-										
-									}
-									%>
+									</c:forEach>
 									<!-- loop end -->
 									
 									

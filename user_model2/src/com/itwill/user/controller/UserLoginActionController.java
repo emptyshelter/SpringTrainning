@@ -29,7 +29,7 @@ public class UserLoginActionController implements Controller {
 				User loginUser = userService.login(userId, password);
 				request.getSession().setAttribute("sUserId", userId);
 				request.getSession().setAttribute("sUser", loginUser);
-				forwardPath = "forward:user_main.do";
+				forwardPath = "forward:user_list.do";
 
 			} catch (UserNotFoundException e) {
 				request.setAttribute("msg1", e.getMessage());

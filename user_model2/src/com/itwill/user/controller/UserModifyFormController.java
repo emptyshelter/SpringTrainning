@@ -16,12 +16,13 @@ public class UserModifyFormController implements Controller{
 			forwardPath="forward:/WEB-INF/views/user_error.jsp";
 		}
 		String userId=request.getParameter("userId");
+		System.out.println(userId+"uuuuuuuuuuuuuuu저아이디");
 		try{
 			User user=null;
 			UserService userService=UserService.getInstance();
 			user = userService.findUser(userId);
 			request.setAttribute("user", user);
-			forwardPath = "redirect:user_error.do";
+			forwardPath = "forward:/WEB-INF/views/user_modify_form.jsp";
 		}catch(Exception e){
 			e.printStackTrace();
 			request.setAttribute("msg", e.getMessage());

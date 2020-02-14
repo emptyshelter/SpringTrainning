@@ -6,7 +6,9 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class EncodingFilter implements Filter {
 	private String encoding = null;
@@ -37,6 +39,16 @@ public class EncodingFilter implements Filter {
 		FilterChain chain)
 		throws IOException, ServletException {
 		//System.out.println("요청시마다 호출 doFilter()");
+		
+		HttpServletRequest req = (HttpServletRequest) request;
+		HttpServletResponse res = (HttpServletResponse) response;
+		
+		HttpSession session = req.getSession();
+		String sUserId=(String)session.getAttribute("sUserId");
+		if(sUserId==null){
+			res.sendRedirect("forward:user_main.do");
+			return;
+		}
 
 		if (request.getCharacterEncoding() == null) {
 			if (encoding != null) {

@@ -25,6 +25,7 @@ public class UserWriteActionController implements Controller {
 				UserService userService = UserService.getInstance();
 				newUser = new User(userId, password, name, email);
 				userService.create(newUser);
+				forwardPath = "forward:user_login_form.do";
 			} catch (ExistedUserException e) {
 				request.setAttribute("msg", e.getMessage());
 				request.setAttribute("fuser", newUser);
