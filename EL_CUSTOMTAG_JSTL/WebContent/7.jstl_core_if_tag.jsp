@@ -2,9 +2,10 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="simple" uri="http://www.itwill.co.kr/jsp/simpleTag"%>
 <%
 	session.setAttribute("sUserId", "mint");
-	session.setAttribute("level", 2);
+	session.setAttribute("level", 5);
 %>
 <html>
 <head>
@@ -17,9 +18,9 @@
 	<c:if test='${true}'>
 	1.항상실행<br>
 	</c:if>
-	<c:if test='${false}'>
+	<simple:If test='${false}'>
 	2.항상안실행<br>
-	</c:if>
+	</simple:If>
 	<c:if test='true'>
 	1.항상실행<br>
 	</c:if>
@@ -31,14 +32,13 @@
 		<br>
 	</c:if>
 	<c:if test='${sUserId!=null}'>
-		<a href='logout_action.jsp'>로그아웃</a>
+		<a href='logout_action.jsp'>${sUserId} 님 로그아웃</a>
 		<br>
 	</c:if>
-	<c:if test='${!empty(level) && level >=3}'>
-	고수님 레벨이 ${level} 이상이시군요 <br>
-	</c:if>
-	<c:if test='${!(!empty(level) && level >=3)}'>
-	하수님 레벨이 3이하 시군요 [${level}] 혹은 null <br>
+	<c:if test="${!empty(level)}">
+		<c:if test="${level>=5 }">
+		고수이군요[${level}]<br>
+		</c:if>
 	</c:if>
 </body>
 </html>
