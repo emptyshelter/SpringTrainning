@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwill.guest.mapper.GuestMapper">
+	<!-- <resultMap type="com.itwill.guest.Guest" id="guestResultMap"> <result 
+		column="GUEST_NO" property="no"/> <result column="GUEST_NAME" property="name"/> 
+		<result column="GUEST_DATE" property="date"/> <result column="GUEST_EMAIL" 
+		property="email"/> <result column="GUEST_HOMEPAGE" property="homepage"/> 
+		<result column="GUEST_TITLE" property="title"/> <result column="GUEST_CONTENT" 
+		property="content"/> </resultMap> -->
+	<select id="findGuestByNo" parameterType="java.lang.Integer"
+		resultType="com.itwill.guest.Guest">
+		select guest_no, guest_name,
+		guest_date,guest_email,guest_homepage, guest_title,guest_content
+		from
+		guest
+		where guest_no=#{guest_no}
+	</select>
+	<select id="findAllGuest" resultType="com.itwill.guest.Guest">
+		select guest_no,
+		guest_name,
+		guest_date,guest_email,guest_homepage,
+		guest_title,guest_content
+		from
+		guest
+	</select>
+	<insert id="insertGuest" parameterType="Guest">
+		insert into guest values
+		(guest_no_seq.nextval,#{guest_name},#{guest_date},#{guest_email},#{guest_homepage},#{guest_title},#{guest_content})
+	</insert>
+	<delete id="deleteGuestByNo" parameterType="int">
+		delete from guest where guest_no=#{guest_no}
+	</delete>
+	<update id="updateGuset" parameterType="Guest">
+		update guest set  guest_name=#{guest_name}, 
+		guest_email=#{guest_email}, guest_homepage=#{guest_homepage}, 
+		guest_title=#{guest_title}, guest_content=#{guest_content} where guest_no=${guest_no}
+	</update>
+</mapper>
