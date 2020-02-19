@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis3.mapper.AddressMapper">
+	<resultMap type="com.mybatis3.domain.Address" id="addressResultMap">
+		<result column="ADDR_ID" property="addrId" />
+	</resultMap>
+	<select id="findAddressById" parameterType="int" resultMap="addressResultMap">
+		select * 
+		from addresses
+		where addr_id=#{addrId}
+	</select>
+	<select id="findAddressAll" resultMap="addressResultMap">
+		select *
+		from addresses
+	</select>
+	<select id="findAddressByIdResultMap" 
+			parameterType="int" 
+			resultMap="addressResultMap">
+		select addr_id,street,city,state,zip,country
+		from addresses
+		where addr_id=#{addrId}
+	</select>
+	<insert id="insertAddress" parameterType="com.mybatis3.domain.Address">
+		insert into addresses (addr_id,street,city,state,zip,country)
+		values(#{addrId},#{street},#{city},#{state},#{zip},#{country})
+	</insert>
+</mapper>
