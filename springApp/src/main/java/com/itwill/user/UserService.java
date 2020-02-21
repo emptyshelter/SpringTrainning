@@ -1,10 +1,10 @@
 package com.itwill.user;
-
 import java.util.List;
-
+import org.springframework.stereotype.Component;
 import com.itwill.user.exception.ExistedUserException;
 import com.itwill.user.exception.PasswordMismatchException;
 import com.itwill.user.exception.UserNotFoundException;
+@Component(value = "userService")
 public interface UserService{
 	public int create(User user) throws ExistedUserException,Exception;
 	public int update(User user)throws Exception;

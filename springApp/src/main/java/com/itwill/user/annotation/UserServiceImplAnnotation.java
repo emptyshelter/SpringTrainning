@@ -2,19 +2,19 @@ package com.itwill.user.annotation;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.itwill.user.User;
 import com.itwill.user.UserService;
 import com.itwill.user.exception.ExistedUserException;
 import com.itwill.user.exception.PasswordMismatchException;
 import com.itwill.user.exception.UserNotFoundException;
-
-
-
-
+@Component("userService")
+@Scope("singleton")
+@Lazy(true)
 public class UserServiceImplAnnotation implements UserService {
 
 	private UserServiceImplAnnotation(){
