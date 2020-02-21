@@ -12,13 +12,17 @@ public class SpringApplicationContextMain {
 		 */
 		System.out.println("-------------Spring Container초기화시작--------");
 		ApplicationContext applicationContext=
-				new ClassPathXmlApplicationContext("ApplicationContext.xml");
+				new ClassPathXmlApplicationContext("com/itwill0/context/0.applicationContext.xml");
 		System.out.println("-------------Spring Container초기화끝----------");
-		ProductService productService1 = (ProductService) applicationContext.getBean("productService");
-		System.out.println("#######"+productService1.productList());
-		ProductService productService2 = (ProductService) applicationContext.getBean("productService");
-		System.out.println("#######"+productService2.productList());
-		if(productService1 == productService2) {
+		
+		ProductService productService1=
+				(ProductService)applicationContext.getBean("productService");
+		System.out.println("### "+productService1.productList());
+		ProductService productService2=
+				(ProductService)applicationContext.getBean("productService");
+		System.out.println("### "+productService2.productList());
+		
+		if(productService1==productService2) {
 			System.out.println(productService1+"=="+productService2);
 		}
 	}

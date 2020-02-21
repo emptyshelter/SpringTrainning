@@ -7,7 +7,7 @@
 	</configSuffixes>
 	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
-		<config>src/main/java/ApplicationContext.xml</config>
+		<config>src/main/java/com/itwill0/context/0.applicationContext.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
