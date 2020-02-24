@@ -10,9 +10,9 @@ public class UserServiceAnnotationClient {
 			new ClassPathXmlApplicationContext("com/itwill/user/client/99.user-annotation.xml");
 		
 		UserService userService = (UserService)applicationContext.getBean("userService");
-		userService.findUser("id");
-		userService.remove("id");
-		userService.findUserList();
+		System.out.println(userService.findUser("id"));
+		System.out.println(userService.remove("id"));
+		System.out.println(userService.findUserList());
 		
 	}
 }

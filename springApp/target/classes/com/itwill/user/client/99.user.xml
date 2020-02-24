@@ -2,6 +2,12 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-	<bean id="userDao" scope="singleton" class="com.itwill.user.UserDaoImpl"/>
-	<bean id="userService" depends-on="userDao"  scope="singleton" class="com.itwill.user.UserServiceImpl"/>
+	<bean id="userDao" scope="singleton"
+		class="com.itwill.user.UserDaoImpl" />
+	<bean id="userService" depends-on="userDao" scope="singleton"
+		class="com.itwill.user.UserServiceImpl">
+		<constructor-arg index="0" ref="userDao" />
+		<property name="userDao" ref="userDao"></property>
+	</bean>
+
 </beans>

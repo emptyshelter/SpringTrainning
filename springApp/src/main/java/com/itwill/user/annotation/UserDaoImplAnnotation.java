@@ -2,19 +2,16 @@ package com.itwill.user.annotation;
 
 import java.util.List;
 
-import org.springframework.context.annotation.DependsOn;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
 
 import com.itwill.user.User;
 import com.itwill.user.UserDao;
 
-@Component("userDao")
-@Scope("prototype")
-@Lazy(true)
-@DependsOn("userDao")
+@Repository(value="userDao")
 public class UserDaoImplAnnotation implements UserDao {
+	private SqlSession sqlSession;
+	public static String NAMESPACE="com.itwill3.dao.UserMapper.";
 	public UserDaoImplAnnotation() {
 		System.out.println("#### UserDaoImplAnnotation() : 디폴트생성자 호출  ");
 	}
@@ -29,7 +26,7 @@ public class UserDaoImplAnnotation implements UserDao {
 	@Override
 	public int create(User user) throws Exception {
 		System.out.println("#### UserDaoImplAnnotation : create() 호출  ");
-		return 0;
+		return sqlSession.insert(NAMESPACE+"create",user);
 	}
 
 	/*
@@ -41,7 +38,7 @@ public class UserDaoImplAnnotation implements UserDao {
 	@Override
 	public int update(User user) throws Exception {
 		System.out.println("#### UserDaoImplAnnotation : update() 호출  ");
-		return 0;
+		return sqlSession.update(NAMESPACE+"update",user);
 	}
 
 	/*
@@ -53,7 +50,7 @@ public class UserDaoImplAnnotation implements UserDao {
 	@Override
 	public int remove(String userId) throws Exception {
 		System.out.println("#### UserDaoImplAnnotation : remove() 호출  ");
-		return 0;
+		return sqlSession.delete(NAMESPACE+"remove",userId);
 	}
 	
 	/*
@@ -66,7 +63,7 @@ public class UserDaoImplAnnotation implements UserDao {
 	@Override
 	public User findUser(String userId) throws Exception {
 		System.out.println("#### UserDaoImplAnnotation : findUser() 호출  ");
-		return null;
+		return sqlSession.selectOne(NAMESPACE+"findUser",userId);
 	}
 	/*
 	 * 모든사용자 정보를 데이타베이스에서 찾아서 
@@ -78,7 +75,7 @@ public class UserDaoImplAnnotation implements UserDao {
 	@Override
 	public List<User> findUserList() throws Exception {
 		System.out.println("#### UserDaoImplAnnotation : findUserList 호출  ");
-		return null;
+		return sqlSession.selectList(NAMESPACE+"findUserList");
 	}
 	/*
 	 * 인자로 전달되는 아이디를 가지는 사용자가 존재하는지의 여부를판별
