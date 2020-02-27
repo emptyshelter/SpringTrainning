@@ -16,18 +16,25 @@
 	</li>
 	<li>
 		DispatcherServlet 이 HelloController객체의 
-		handleRequest()메소드호출
+		handleRequest()메쏘드호출
 	</li>
 	<li>
 		DispatcherServlet 이 HelloController객체의 
-		handleRequest()메소드호출 반환된 
+		handleRequest()메쏘드호출 반환된 
 		path[/WEB-INF/views/hello.jsp] 로 forwading..
 	</li>
 	<li>
 		/WEB-INF/views/hello.jsp 응답
 	</li>
-	<li>request.getAttribute("msg"):${msg}</li>
+	<li>request.getAtttribute("msg"): ${msg}</li>
+	
 </ol>
 
 </body>
+
+
+
+
+
+
 </html>

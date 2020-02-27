@@ -7,27 +7,35 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>hello.jsp</h1><hr/>
+<h1>hello2.jsp</h1><hr/>
 <ol>
-	<li>/hello.do 요청</li>
+	<li>/hello2.do 요청</li>
 	<li>
 		DispatcherServlet 이 HadlerMapping객체로부터 
-	    요청url[/hello.do]에 해당하는 HelloController2객체얻기
+	    요청url[/hello2.do]에 해당하는 HelloAnnotationController2객체얻기
 	</li>
 	<li>
-		DispatcherServlet 이 HelloController2객체의 
-		helloworld1()메소드호출
+		DispatcherServlet 이 HelloAnnotationController2객체의 
+		hello2()메쏘드호출
 	</li>
 	<li>
-		DispatcherServlet 이 HelloController2객체의 
-		helloworld2()메소드호출 반환된 
+		DispatcherServlet 이 HelloAnnotationController2객체의 
+		hello2()메쏘드호출후반환된 
 		String path[forward:/WEB-INF/views/hello2.jsp] 로 forwading..
 	</li>
 	<li>
 		/WEB-INF/views/hello2.jsp 응답
 	</li>
-	<li>request.getAttribute("msg","안녕.."):${msg}</li>
+	<li>request.setAttribute("msg", "안녕HelloAnnotationController2");
+	: ${msg}</li>
+	
 </ol>
 
 </body>
+
+
+
+
+
+
 </html>
