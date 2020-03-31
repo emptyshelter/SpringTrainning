@@ -16,6 +16,7 @@ public class User {
 	 * EMAIL 			 VARCHAR2(300)
 	 * ===================================
 	 */
+	
 	private String userId;
 	private String password;
 	private String name;

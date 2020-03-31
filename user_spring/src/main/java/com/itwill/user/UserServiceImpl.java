@@ -13,15 +13,19 @@ import com.itwill.user.exception.UserNotFoundException;
 
 public class UserServiceImpl implements UserService {
 	private UserDao userDao;
+	
 	public UserServiceImpl() throws Exception{
-		userDao=new UserDaoImpl();
-		System.out.println("UserServiceImpl()생성자");
+		System.out.println("### UserServiceImpl()생성자");
 	}
 	public UserServiceImpl(UserDao userDao) throws Exception{
-		System.out.println("UserServiceImpl("+userDao+")생성자");
-		this.userDao = userDao;
+		System.out.println("### UserServiceImpl("+userDao+")생성자");
+		this.userDao=userDao;
 	}
 	
+	
+	public UserDao getUserDao() {
+		return userDao;
+	}
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}

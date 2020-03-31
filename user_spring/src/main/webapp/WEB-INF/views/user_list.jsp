@@ -3,15 +3,14 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.itwill.user.UserService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ include file="user_login_check.jspf"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>	
+    
+<%--
+	String USER_NOT_FOUND_MSG = (String)request.getAttribute("USER_NOT_FOUND_MSG");
+	ArrayList<User> userList = (ArrayList<User>)request.getAttribute("userList");
 
-<%
-	String USER_NOT_FOUND_MSG = (String) request.getAttribute("USER_NOT_FOUND_MSG");
-	ArrayList<User> userList = (ArrayList<User>) request.getAttribute("userList");
-%>
-
+--%>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,14 +18,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel=stylesheet href="css/styles.css" type="text/css">
 <link rel=stylesheet href="css/user.css" type="text/css">
-<script type="text/javascript">
-<%if (USER_NOT_FOUND_MSG != null) {%>
-	alert('<%=USER_NOT_FOUND_MSG%>
-	')
-<%}%>
-	
-</script>
-
 <style type="text/css" media="screen">
 </style>
 </head>
@@ -37,15 +28,15 @@
 		<!-- header start -->
 		<div id="header">
 			<!-- include_common_top.jsp start-->
-			<jsp:include page="include_common_top.jsp" />
-
+			<jsp:include page="include_common_top.jsp"/>
+			
 			<!-- include_common_top.jsp end-->
 		</div>
 		<!-- header end -->
 		<!-- navigation start-->
 		<div id="navigation">
 			<!-- include_common_left.jsp start-->
-			<jsp:include page="include_common_left.jsp" />
+			<jsp:include page="include_common_left.jsp"/>
 			<!-- include_common_left.jsp end-->
 		</div>
 		<!-- navigation end-->
@@ -73,24 +64,32 @@
 										<td align=center bgcolor="E6ECDE">이름</td>
 										<td align=center bgcolor="E6ECDE">이메일</td>
 									</tr>
-									<!-- loop start -->
+									
 									<c:forEach var="user" items="${userList}">
-										<tr>
-											<td width=190 align=center bgcolor="ffffff" height="20">
-												${user.userId}</td>
-											<td width=200 bgcolor="ffffff" style="padding-left: 10">
-												<a href="user_view.do?userId=${user.userId}" class="user">${user.name}</a>
-											</td>
-											<td width=200 align=center bgcolor="ffffff">${user.email}
-											</td>
-										</tr>
-									</c:forEach>
+									<!-- loop start -->
+									<c:if test="${sUserId!=user.userId}">
+									<tr>
+										<td width=190 align=center bgcolor="ffffff" height="20">
+											${user.userId}
+										</td>
+										<td width=200 bgcolor="ffffff" style="padding-left: 10">
+											<a href="user_view?userId=${user.userId}"
+											class="user"> ${user.name}
+										</a>
+										</td>
+										<td width=200 align=center bgcolor="ffffff">${user.email}
+										</td>
+									</tr>
+									</c:if>
 									<!-- loop end -->
-								</table>
+									</c:forEach>								
+									</table>
 							</form> <br />
 							<table border="0" cellpadding="0" cellspacing="1">
 								<tr>
-									<td align="right"></td>
+									<td align="right">
+									
+									</td>
 								</tr>
 							</table></td>
 					</tr>
@@ -102,7 +101,7 @@
 		<!--wrapper end-->
 		<div id="footer">
 			<!-- include_common_bottom.jsp start-->
-			<jsp:include page="include_common_bottom.jsp" />
+			<jsp:include page="include_common_bottom.jsp"/>
 			<!-- include_common_bottom.jsp end-->
 		</div>
 	</div>

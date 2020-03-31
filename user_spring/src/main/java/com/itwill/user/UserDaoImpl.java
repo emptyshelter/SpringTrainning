@@ -9,6 +9,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 
+
 import com.itwill.common.Util;
 /*
  사용자관리에서 데이타베이스와의 작업을 전담하는 클래스
@@ -16,16 +17,20 @@ import com.itwill.common.Util;
  */
 public class UserDaoImpl implements UserDao  {
 	private DataSource dataSource;
+	
 	public UserDaoImpl() throws Exception {
-		System.out.println("UserDaoImpl()생성자");
-		
+		System.out.println("### UserDaoImpl()생성자");
 	}
 	/*
 	 * UserDao Test 생성자
 	 */
 	public UserDaoImpl(DataSource dataSource) throws Exception {
 		this.dataSource=dataSource;
-		System.out.println("UserDaoImpl"+dataSource+"()생성자");
+		System.out.println("UserDaoImpl("+dataSource+") 생성자");
+	}
+	
+	public DataSource getDataSource() {
+		return dataSource;
 	}
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
